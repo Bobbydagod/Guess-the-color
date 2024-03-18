@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Color</title>
+</head>
+<body>
+    <p id="randocolor">Random Color</p>
+    <h1>Guess the Color</h1>
+    <h3 >I have selected a random color from the list. <br> Let's see if you can guess it.</h3>
+    <form>
+        <label>
+            Chosse color I selected: 
+        </label>
+        <select id="guess" onchange="check(this)" >
+            <option value="None" id="None">None</option>
+            <option value="Option1" id="Option1">Color 1</option>
+            <option value="Option2" id="Option2">Color 2</option>
+            <option value="Option3" id="Option3">Color 3</option>
+            <option value="Option4" id="Option4">Color 4</option>
+            <option value="Option5" id="Option5">Color 5</option>
+        </select>
+        <p id="hidden" style="color: white;"></p>Click on "restart game" to start again
+        <button>Restart Game</button>
+    </form>
+</body>
+<script>
+ var x= document.getElementById("guess").options.namedItem("None")
+  x.style.setProperty("background-color","white")
+  r=Math.floor(Math.random()*255)
+  g=Math.floor(Math.random()*255)
+  b=Math.floor(Math.random()*255)   
+  bgcolor1="rgb("+r+","+g+","+b+")"
+  var x= document.getElementById("guess").options.namedItem("Option1")
+  x.style.setProperty("background-color",bgcolor1)
+  r=Math.floor(Math.random()*255)
+  g=Math.floor(Math.random()*255)
+  b=Math.floor(Math.random()*255)
+  bgcolor2="rgb("+r+","+g+","+b+")"
+  var x= document.getElementById("guess").options.namedItem("Option2")
+  x.style.setProperty("background-color",bgcolor2)
+  r=Math.floor(Math.random()*255)
+  g=Math.floor(Math.random()*255)
+  b=Math.floor(Math.random()*255)
+  bgcolor3="rgb("+r+","+g+","+b+")"
+  var x= document.getElementById("guess").options.namedItem("Option3")
+  x.style.setProperty("background-color",bgcolor3)
+  r=Math.floor(Math.random()*255)
+  g=Math.floor(Math.random()*255)
+  b=Math.floor(Math.random()*255)
+  bgcolor4="rgb("+r+","+g+","+b+")"
+  var x= document.getElementById("guess").options.namedItem("Option4")
+  x.style.setProperty("background-color",bgcolor4)
+  r=Math.floor(Math.random()*255)
+  g=Math.floor(Math.random()*255)
+  b=Math.floor(Math.random()*255)
+  bgcolor5="rgb("+r+","+g+","+b+")"
+  var x= document.getElementById("guess").options.namedItem("Option5")
+  x.style.setProperty("background-color",bgcolor5)
+  var bgcolors = [bgcolor1, bgcolor2, bgcolor3, bgcolor4, bgcolor5]
+  var randomcolor = bgcolors[Math.floor(Math.random()*5)]
+guesscolor=0
+  guesscolorflag=0
+  function rgbToHex(rgb) {
+      rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+      function hex(x) { return ("0" + parseInt(x).toString(16)).slice(-2); } return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]); }
+  function check(obg) 
+  {
+if (guesscolorflag==0){
+var selectedoption = obg.options[obg.selectedIndex]                     
+selectedcolor = window.getComputedStyle(selectedoption,null).getPropertyValue("background-color")
+document.getElementById("hidden").style.backgroundColor=selectedcolor
+// document.getElementById("guess").style.backgroundColor=selectedcolor
+
+if (rgbToHex(selectedcolor)==rgbToHex(randomcolor)){
+guesscolorflag=1
+ guesscolor++
+ document.getElementById("hidden").innerHTML="Congratulations You guessed the right color in " +guesscolor+" guess(es)!"
+}
+else{
+document.getElementById("hidden").innerHTML="Oops your guess is incorrect, Try again." 
+guesscolor++
+}
+}
+else {
+document.getElementById("hidden").innerHTML="You have already guessed the correct color."
+}
+}
+</script>
+</html>
